@@ -8,29 +8,22 @@ function unpronouncable(length) {
 		string += letters[Math.floor(Math.random() * letters.length)];
 	}
 
-	function generate() {
-		for (var j = 0; j < string.length; j += 1) {
-			var test = string.slice(j,j+2);
-			for (var k = 0; k < twoLetters.length; k += 1) {
-				if (twoLetters[k] === test) {
-					console.log('Has two letter syllable');
+	function generateHelper(string, array) {
+		for (var i = 0; i < string.length; i += 1) {
+			var test = string.slice(i,i+2);
+			for (var j = 0; j < array.length; j += 1) {
+				if (array[j] === test) {
+					console.log('Contains pronouncable syllable');
 					return unpronouncable(length);
 				}
 			}
 		}
-		for (var j = 0; j < string.length; j += 1) {
-			var test = string.slice(j,j+3);
-			for (var k = 0; k < twoLetters.length; k += 1) {
-				if (threeLetters[k] === test) {
-					console.log('Has three letter syllable');
-					return unpronouncable(length);
-				}
-			}			
-		}
-
-		return string;
 	}
-	return generate();
+
+	generateHelper(string,twoLetters);
+	generateHelper(string,threeLetters);
+
+	return string;
 }
 
 console.log(unpronouncable(8));
